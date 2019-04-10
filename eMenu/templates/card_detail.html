@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Card detail</title>
+</head>
+<body>
+    <h4>{{ card.name }}</h4>
+    <li>{{ card.description }}</li>
+    <li>{{ card.date_added }}</li>
+    <li>{{ card.date_updated }}</li>
+    <li>{{ card.dish.count }}</li>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Preparation time</th>
+                <th>Date added</th>
+                <th>Date updated</th>
+                <th>Vegetarian meal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dish in card.dish.all %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ dish.name }}</td>
+                    <td>{{ dish.description }}</td>
+                    <td>{{ dish.price }}</td>
+                    <td>{{ dish.preparation_time }}</td>
+                    <td>{{ dish.date_added }}</td>
+                    <td>{{ dish.date_updated }}</td>
+                    <td>{{ dish.vegetarian }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

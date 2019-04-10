@@ -1,0 +1,62 @@
+{#{% load render_table from django_tables2 %}#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Cards</title>
+</head>
+<body>
+{% if all_cards_list %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Number of dishes</th>
+                <th>Description</th>
+                <th>Date added</th>
+                <th>Date updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for card in all_cards_list %}
+                <tr>
+                    <td>{{ card.id }}</td>
+                    <td><a href="{% url 'card_detail' card.pk %}">{{ card.name }}</a></td>
+                    <td>{{ card.dish.count }}</td>
+                    <td>{{ card.description }}</td>
+                    <td>{{ card.date_added }}</td>
+                    <td>{{ card.date_updated }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    No cards
+{% endif %}
+
+
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+    {% else %}
+      <span>&laquo;</span>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <span>{{ i }} <span class="sr-only"></span></span>
+      {% else %}
+        <a href="?page={{ i }}">{{ i }}</a>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+    {% else %}
+      <span>&raquo;</span>
+    {% endif %}
+  </ul>
+{% endif %}
+
+</body>
+</html>
