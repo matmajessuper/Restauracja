@@ -18,10 +18,13 @@ python manage.py collectstatic
 python manage.py makemigrations
 python manage.py migrate
 ```
+- load data for database from datadump.json
+```sh
+python manage.py loaddata datadump.json
+```
 - and finally start a server
 ```sh
 python manage.py runserver
 ```
 
-- initial data for database in datadump.json
 
