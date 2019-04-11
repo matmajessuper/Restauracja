@@ -1,14 +1,18 @@
-from django.shortcuts import render
 from django.views import generic
+from django_tables2 import SingleTableView
+
 from eMenu.models import Card
+from eMenu.tables import CardTable
 
 
-class CardsListView(generic.ListView):
+class CardsListView(SingleTableView):
     model = Card
-    template_name = 'all_cards_table.html'
-    context_object_name = 'all_cards_list'
-    paginate_by = 5
-    queryset = Card.objects.exclude(dish=None)
+    template_name = 'all_cards_list.html'
+    table_data = Card.objects.exclude(dish=None)
+    table_class = CardTable
+    table_pagination = {
+        'per_page': 5
+    }
 
 
 class CardDetailView(generic.DetailView):

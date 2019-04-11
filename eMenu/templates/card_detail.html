@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Card detail</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap4 %}
     <h4>{{ card.name }}</h4>
     <li>{{ card.description }}</li>
-    <li>{{ card.date_added }}</li>
-    <li>{{ card.date_updated }}</li>
-    <li>{{ card.dish.count }}</li>
-    <table>
+    <li>Date added: {{ card.date_added }}</li>
+    <li>Last modified: {{ card.date_updated }}</li>
+    <li>Number of dishes: {{ card.dish.count }}</li>
+    <table border="1">
         <thead>
             <tr>
                 <th>No.</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
@@ -27,17 +24,22 @@
             {% for dish in card.dish.all %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
+                    <td>{% if dish.img %}
+                        <img src="{{ dish.img.url }}">
+                        {% endif %}</td>
                     <td>{{ dish.name }}</td>
                     <td>{{ dish.description }}</td>
                     <td>{{ dish.price }}</td>
                     <td>{{ dish.preparation_time }}</td>
                     <td>{{ dish.date_added }}</td>
                     <td>{{ dish.date_updated }}</td>
-                    <td>{{ dish.vegetarian }}</td>
+                    <td>{% if dish.vegetarian %}
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/natural-food.png">
+                        {% endif %}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    <a href="https://icons8.com/icon/96085/natural-food">Natural Food icon by Icons8</a>
 
-</body>
-</html>
+{% endblock %}
