@@ -1,6 +1,5 @@
 from django.views import generic
 from django_tables2 import SingleTableView
-
 from eMenu.models import Card
 from eMenu.tables import CardTable
 
